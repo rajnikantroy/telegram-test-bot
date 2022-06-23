@@ -11,7 +11,8 @@ app.listen(PORT, () => {
 */
 const options = {
   webHook: {
-    port: 3000
+    port: 3000,
+    polling: true
   }
 };
 const token = process.env.SECRET_KEY_TOKEN;
@@ -19,7 +20,7 @@ const bot = new TelegramBot(token, options);
 
 const hook = process.env.HOOK_URL;
 
-bot.setWebHook(hook);
+//bot.setWebHook(hook);
 
 bot.onText(/\/echo (.+)/, (msg, match) => {
   const chatId = msg.chat.id;
