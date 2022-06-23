@@ -1,6 +1,24 @@
 const TelegramBot = require('node-telegram-bot-api');
 const jsforce = require('jsforce');
+const Promise = require('bluebird');
 
+function prepare() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(), 2000);
+  });
+}
+
+function build() {
+  return prepare().then(() => console.log('it was built'));
+}
+
+function run() {
+  return build()
+    .timeout(1000)
+    .catch(Promise.TimeoutError, err => console.log('there was an error'));
+}
+
+run();
 /*var express = require('express');
 var app = express();
 
