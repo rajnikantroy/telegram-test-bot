@@ -1,5 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 const jsforce = require('jsforce');
+
 /*var express = require('express');
 var app = express();
 
@@ -8,8 +9,18 @@ app.listen(PORT, () => {
     console.log(`Our app is running on port ${ PORT }`);
 });
 */
+const options = {
+  webHook: {
+    port: process.env.PORT,
+    polling: true
+  }
+};
 const token = process.env.SECRET_KEY_TOKEN;
-const bot = new TelegramBot(token, {polling: true});
+const bot = new TelegramBot(token, options);
+
+const hook = process.env.HOOK_URL;
+
+bot.setWebHook(hook);
 
 bot.onText(/\/echo (.+)/, (msg, match) => {
   const chatId = msg.chat.id;
