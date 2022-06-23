@@ -11,8 +11,7 @@ app.listen(PORT, () => {
 */
 const options = {
   webHook: {
-    port: process.env.PORT,
-    polling: true
+    port: 3000
   }
 };
 const token = process.env.SECRET_KEY_TOKEN;
